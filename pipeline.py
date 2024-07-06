@@ -308,7 +308,7 @@ class Pipeline(StableDiffusionPipeline):
             else:
                 sum_prompt_embeds = sum_prompt_embeds + pe
         print(sum_prompt_embeds.shape)
-        prompt_embeds = torch.cat([prompt_embeds_2[0], sum_prompt_embeds[1]], dim=0)
+        prompt_embeds = torch.cat([prompt_embeds_2[0].unsqueeze(0), sum_prompt_embeds[1].unsqueeze(0)], dim=0)
 
         # 4. Prepare timesteps
         self.scheduler.set_timesteps(num_inference_steps, device=device)
