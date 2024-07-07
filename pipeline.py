@@ -55,7 +55,6 @@ class Pipeline(StableDiffusionPipeline):
         else:
             batch_size = prompt_embeds.shape[0]
         
-        print(prompt_embeds)
         if prompt_embeds is None:
             text_inputs = self.tokenizer(
                 prompt,
@@ -308,7 +307,8 @@ class Pipeline(StableDiffusionPipeline):
             else:
                 sum_prompt_embeds = sum_prompt_embeds + pe
         print(sum_prompt_embeds.shape)
-        prompt_embeds = torch.cat([prompt_embeds_2[0].unsqueeze(0), sum_prompt_embeds[1].unsqueeze(0)], dim=0)
+        # prompt_embeds = torch.cat([prompt_embeds_2[0].unsqueeze(0), sum_prompt_embeds[1].unsqueeze(0)], dim=0)
+        prompt_embeds = sum_prompt_embeds
         print(prompt_embeds.shape)
 
         # 4. Prepare timesteps
